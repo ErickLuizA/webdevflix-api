@@ -21,6 +21,7 @@ export default {
   production: {
     client: 'pg',
     connection: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false },
     migrations: {
       directory: path.join(__dirname, 'src', 'database', 'migrations')
     },
