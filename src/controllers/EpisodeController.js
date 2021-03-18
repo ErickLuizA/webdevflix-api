@@ -11,18 +11,6 @@ export default class EpisodeController {
     }
   }
 
-  async show (req, res, next) {
-    const { id } = req.params
-
-    try {
-      const response = await db('episodes').where({ id })
-
-      return res.status(200).json(response)
-    } catch (error) {
-      next(error)
-    }
-  }
-
   async create (req, res, next) {
     const { title, link, category, description } = req.body
 

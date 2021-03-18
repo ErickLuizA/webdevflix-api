@@ -10,11 +10,7 @@ const categoryController = new CategoryController()
 
 router.get('/episodes', episodeController.index)
 
-router.get('/episodes/:id', episodeController.show)
-
 router.post('/newepisode', episodeController.create)
-
-router.get('/category', categoryController.show)
 
 router.get('/categories', categoryController.index)
 
