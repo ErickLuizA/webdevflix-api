@@ -1,21 +1,20 @@
-// Update with your config settings.
-require('dotenv').config()
+import path, { dirname } from 'path'
+import dotenv from 'dotenv'
+import { fileURLToPath } from 'url'
 
-module.exports = {
+dotenv.config()
 
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
+export default {
   development: {
     client: 'pg',
-    connection: {
-      host: process.env.DATABASE_HOST,
-      user: process.env.DATABASE_USER,
-      password: process.env.DATABASE_PASSWORD,
-      database: process.env.DATABASE_DATABASE
-    },
+    connection: process.env.CONNECTION_STRING,
     migrations: {
-      directory: `${ __dirname }/src/database/migrations`
+      directory: path.join(__dirname, 'src', 'database', 'migrations')
     },
     seeds: {
-      directory: `${ __dirname }/src/database/seeds`
+      directory: path.join(__dirname, 'src', 'database', 'seeds')
     }
   },
 
@@ -23,10 +22,10 @@ module.exports = {
     client: 'pg',
     connection: process.env.DATABASE_URL,
     migrations: {
-      directory: `${ __dirname }/src/database/migrations`
+      directory: path.join(__dirname, 'src', 'database', 'migrations')
     },
     seeds: {
-      directory: `${ __dirname }/src/database/seeds`
+      directory: path.join(__dirname, 'src', 'database', 'seeds')
     }
   }
-};
+}

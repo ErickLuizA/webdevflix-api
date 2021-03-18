@@ -1,8 +1,10 @@
-exports.up = async knex => knex.schema.createTable('categories', table => {
-  table.increments('id')
-  table.text('title').notNullable().unique()
+export async function up (knex) {
+  return knex.schema.createTable('categories', table => {
+    table.increments('id')
+    table.text('title').notNullable().unique()
 
-  table.timestamps(true, true)
-})
+    table.timestamps(true, true)
+  })
+}
 
-exports.down = async knex => knex.schema.dropTable('categories')
+export async function down (knex) { return knex.schema.dropTable('categories') }

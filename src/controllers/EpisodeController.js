@@ -1,53 +1,50 @@
-const db =  require("../database/connection")
+import db from '../database/connection.js'
 
-class EpisodeController {
-  async index(req, res, next) {
+export default class EpisodeController {
+  async index (_, res, next) {
     try {
-      const response = await db("episodes")
+      const response = await db('episodes')
+
       return res.status(200).json(response)
     } catch (error) {
       next(error)
     }
   }
 
-  async show(req, res, next) {
-
+  async show (req, res, next) {
     const { id } = req.params
-  
+
     try {
-      const response = await db("episodes").where({ id })
+      const response = await db('episodes').where({ id })
+
       return res.status(200).json(response)
     } catch (error) {
       next(error)
     }
   }
 
-  async create(req, res, next) {
-
+  async create (req, res, next) {
     const { title, link, category, description } = req.body
-  
+
     try {
-      const exist = await db("categories").where({ title: category})
-  
-      if(exist.length === 0) {
-        await db("categories").insert([
+      const exist = await db('categories').where({ title: category })
+
+      if (exist.length === 0) {
+        await db('categories').insert([
           { title: category }
         ])
       }
-  
-      await db("episodes").insert({
-        title, 
+
+      await db('episodes').insert({
+        title,
         link,
         category,
         description
       })
-  
-      return res.status(201).send("Episode added")
+
+      return res.status(201).send('Episode added')
     } catch (error) {
       next(error)
     }
   }
-
 }
-
-module.exports = EpisodeController
